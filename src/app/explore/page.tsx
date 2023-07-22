@@ -44,7 +44,10 @@ const mock = [
 
 export default function Explore() {
 	const provider = useProviderStore((state) => state.provider)
+	const ownerAddress = useProviderStore((state) => state.ownerAddress)
+	console.log('Explore');
 	console.log(provider);
+	console.log(ownerAddress);
 
 	return (
 		<>

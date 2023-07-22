@@ -115,6 +115,7 @@ export default function Home() {
   );
   const providerTwo = useProviderStore((state) => state.provider)
   const setWeb3AuthProvider = useProviderStore((state) => state.setProvider)
+  const setOwnerAddress = useProviderStore((state) => state.setOwnerAddress)
 
     useEffect(() => {
     (async () => {
@@ -216,7 +217,7 @@ export default function Home() {
     setUserInfo(userInfo || undefined);
     setProvider(web3AuthModalPack.getProvider() as SafeEventEmitterProvider);
     setWeb3AuthProvider(web3AuthModalPack.getProvider() as SafeEventEmitterProvider);
-    console.log("NOW");
+    setOwnerAddress(signInInfo.eoa);
   };
 
   const logout = async () => {

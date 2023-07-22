@@ -3,7 +3,6 @@ import {ADAPTER_EVENTS, CHAIN_NAMESPACES, SafeEventEmitterProvider, UserInfo, WA
 import {AuthKitSignInData, Web3AuthConfig, Web3AuthEventListener, Web3AuthModalPack} from "@safe-global/auth-kit";
 import {Web3AuthOptions} from "@web3auth/modal";
 import {OpenloginAdapter} from "@web3auth/openlogin-adapter";
-import {Typography} from "@mui/material";
 import Button from "@mui/material/Button";
 
 const connectedHandler: Web3AuthEventListener = (data) =>
@@ -85,7 +84,6 @@ const ConnectButton = (): React.JSX.Element => {
 				ADAPTER_EVENTS.DISCONNECTED,
 				disconnectedHandler
 			);
-			console.log(web3AuthModalPack);
 			setWeb3AuthModalPack(web3AuthModalPack);
 
 			return () => {
@@ -103,7 +101,6 @@ const ConnectButton = (): React.JSX.Element => {
 
 	useEffect(() => {
 		if (web3AuthModalPack && web3AuthModalPack.getProvider()) {
-			console.log("logged in");
 			(async () => {
 				await login();
 			})();
@@ -114,10 +111,8 @@ const ConnectButton = (): React.JSX.Element => {
 		if (!web3AuthModalPack) return;
 
 		const signInInfo = await web3AuthModalPack.signIn();
-		console.log("SIGN IN RESPONSE: ", signInInfo);
 
 		const userInfo = await web3AuthModalPack.getUserInfo();
-		console.log("USER INFO: ", userInfo);
 
 		setSafeAuthSignInResponse(signInInfo);
 		setUserInfo(userInfo || undefined);
