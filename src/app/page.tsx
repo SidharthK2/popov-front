@@ -221,8 +221,8 @@ export default function Home() {
     setProvider(null);
     setSafeAuthSignInResponse(null);
   };
-  
-    const LeftSide = () => (
+
+  const LeftSide = () => (
       <Box data-aos={'fade-right'}>
         <Box marginBottom={2}>
           <Typography variant="h2" color="text.primary" sx={{ fontWeight: 700 }}>
@@ -242,9 +242,20 @@ export default function Home() {
               Popov powers protocols, treasuries and public goods
           </Typography>
         </Box>
-        <Button href={"/explore"} variant="contained" color="primary" size="large">
-          Explore DAO
-        </Button>
+          { safeAuthSignInResponse?.eoa ?
+              <>
+                  <Typography variant="h6" component="p" color="text.secondary">
+                      {safeAuthSignInResponse?.eoa}
+                  </Typography>
+                  <Button href={"/explore"} variant="contained" color="primary" size="large">
+                      Explore DAO
+                  </Button>
+              </>
+              :
+              <button variant="contained" color="primary" size="large" onClick={login}>
+                  Connect Wallet
+              </button>
+          }
       </Box>
   );
 
@@ -355,9 +366,7 @@ export default function Home() {
         </Box>
         <Divider />
       </Box>
-      <button onClick={login}></button>
-      <div>{safeAuthSignInResponse?.eoa}</div>
-        <Box width={1} height={1} data-aos={'fade-up'} component={Card}>
+            <Box width={1} height={1} data-aos={'fade-up'} component={Card}>
             <CardContent>
                 <Box>
                     <Box marginBottom={4}>
