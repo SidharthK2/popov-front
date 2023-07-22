@@ -1,6 +1,4 @@
 "use client";
-import Image from "next/image";
-import styles from "./page.module.css";
 import { useEffect, useState } from "react";
 import {
   ADAPTER_EVENTS,
@@ -19,7 +17,11 @@ import {
   Web3AuthModalPack,
   Web3AuthConfig,
 } from "@safe-global/auth-kit";
+import { Web3AuthConnector } from "@web3auth/web3auth-wagmi-connector";
 import Button from '@mui/material/Button';
+import Header from "@/app/header";
+import useStore from "@/app/store";
+import useProviderStore from "@/app/store";
 
 const mock = [
     {
@@ -111,8 +113,11 @@ export default function Home() {
   const [provider, setProvider] = useState<SafeEventEmitterProvider | null>(
     null
   );
+  const providerTwo = useProviderStore((state) => state.provider)
+  const setWeb3AuthProvider = useProviderStore((state) => state.setProvider)
+  const setOwnerAddress = useProviderStore((state) => state.setOwnerAddress)
 
-  useEffect(() => {
+    useEffect(() => {
     (async () => {
       const options: Web3AuthOptions = {
         //move to env
@@ -211,6 +216,8 @@ export default function Home() {
     setSafeAuthSignInResponse(signInInfo);
     setUserInfo(userInfo || undefined);
     setProvider(web3AuthModalPack.getProvider() as SafeEventEmitterProvider);
+    setWeb3AuthProvider(web3AuthModalPack.getProvider() as SafeEventEmitterProvider);
+    setOwnerAddress(signInInfo.eoa);
   };
 
   const logout = async () => {
@@ -221,8 +228,8 @@ export default function Home() {
     setProvider(null);
     setSafeAuthSignInResponse(null);
   };
-  
-    const LeftSide = () => (
+
+  const LeftSide = () => (
       <Box data-aos={'fade-right'}>
         <Box marginBottom={2}>
           <Typography variant="h2" color="text.primary" sx={{ fontWeight: 700 }}>
@@ -242,9 +249,23 @@ export default function Home() {
               Popov powers protocols, treasuries and public goods
           </Typography>
         </Box>
-        <Button href={"/explore"} variant="contained" color="primary" size="large">
-          Explore DAO
-        </Button>
+          { safeAuthSignInResponse?.eoa ?
+              <>
+                  <Typography variant="h6" component="p" color="text.secondary">
+                      {safeAuthSignInResponse?.eoa}
+                  </Typography>
+                  <Button variant="contained" color="primary" size="large" href={"/explore"}>
+                      Explore DAO
+                  </Button>
+                  <Button variant="contained" color="primary" size="large" onClick={logout}>
+                      Disconnect
+                  </Button>
+              </>
+              :
+              <Button variant="contained" color="primary" size="large" onClick={login}>
+                  Connect Wallet
+              </Button>
+          }
       </Box>
   );
 
@@ -272,7 +293,7 @@ export default function Home() {
   };
   
   return (
-        <>
+      <Box>
       <Box
           sx={{
             width: 1,
@@ -280,6 +301,7 @@ export default function Home() {
             overflow: 'hidden',
           }}
       >
+          <Header/>
         <Box
             width={1}
             margin={'0 auto'}
@@ -355,9 +377,7 @@ export default function Home() {
         </Box>
         <Divider />
       </Box>
-      <button onClick={login}></button>
-      <div>{safeAuthSignInResponse?.eoa}</div>
-        <Box width={1} height={1} data-aos={'fade-up'} component={Card}>
+          <Box width={1} height={1} data-aos={'fade-up'} component={Card}>
             <CardContent>
                 <Box>
                     <Box marginBottom={4}>
@@ -417,6 +437,6 @@ export default function Home() {
                 </Box>
             </CardContent>
         </Box>
-    </>
+    </Box>
   );
 }

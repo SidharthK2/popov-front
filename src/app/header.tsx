@@ -1,30 +1,23 @@
-import React from "react";
-import styles from "@/app/page.module.css";
-import Image from "next/image";
+import React, {useState} from "react";
+import Container from "@/app/container";
+import Topbar from "@/app/components/TopBar";
 
 const Header = (): React.JSX.Element => {
+
+	const [openSidebar, setOpenSidebar] = useState(false);
+
+	const handleSidebarOpen = (): void => {
+		setOpenSidebar(true);
+	};
+
+	const handleSidebarClose = (): void => {
+		setOpenSidebar(false);
+	};
+
 	return(
-		<div className={styles.description}>
-			<p>
-				Get started with popov
-			</p>
-			<div>
-				<a
-					href="/"
-					rel="noopener noreferrer"
-				>
-					At{' '}
-					<Image
-						src="/ethglobal.svg"
-						alt="EthGlobal Logo"
-						className={styles.vercelLogo}
-						width={100}
-						height={24}
-						priority
-					/>
-				</a>
-			</div>
-		</div>
+		<Container maxWidth={1} paddingY={{ xs: 1, sm: 1.5 }}>
+			<Topbar onSidebarOpen={handleSidebarOpen} />
+		</Container>
 	)
 }
 
