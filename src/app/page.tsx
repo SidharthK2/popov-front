@@ -9,7 +9,7 @@ import {
   UserInfo,
   WALLET_ADAPTERS,
 } from "@web3auth/base";
-import { Box, Divider, Grid, Typography } from "@mui/material";
+import { Box, Divider, Grid, Typography, Card, CardContent } from "@mui/material";
 import { OpenloginAdapter } from "@web3auth/openlogin-adapter";
 import { Web3AuthOptions } from "@web3auth/modal";
 import { EthHashInfo } from "@safe-global/safe-react-components";
@@ -19,10 +19,7 @@ import {
   Web3AuthModalPack,
   Web3AuthConfig,
 } from "@safe-global/auth-kit";
-import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import {Card, CardContent, Divider, Grid} from "@mui/material";
 
 const mock = [
     {
