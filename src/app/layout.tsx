@@ -23,7 +23,6 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <main className={styles.main}>
-            <Header/>
           {children}
           <Divider />
           <Container paddingY={4}>

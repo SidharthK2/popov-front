@@ -20,6 +20,7 @@ import {
   Web3AuthConfig,
 } from "@safe-global/auth-kit";
 import Button from '@mui/material/Button';
+import Header from "@/app/header";
 
 const mock = [
     {
@@ -247,14 +248,17 @@ export default function Home() {
                   <Typography variant="h6" component="p" color="text.secondary">
                       {safeAuthSignInResponse?.eoa}
                   </Typography>
-                  <Button href={"/explore"} variant="contained" color="primary" size="large">
+                  <Button variant="contained" color="primary" size="large" href={"/explore"}>
                       Explore DAO
+                  </Button>
+                  <Button variant="contained" color="primary" size="large" onClick={logout}>
+                      Disconnect
                   </Button>
               </>
               :
-              <button variant="contained" color="primary" size="large" onClick={login}>
+              <Button variant="contained" color="primary" size="large" onClick={login}>
                   Connect Wallet
-              </button>
+              </Button>
           }
       </Box>
   );
@@ -283,7 +287,7 @@ export default function Home() {
   };
   
   return (
-        <>
+      <Box>
       <Box
           sx={{
             width: 1,
@@ -291,6 +295,7 @@ export default function Home() {
             overflow: 'hidden',
           }}
       >
+          <Header/>
         <Box
             width={1}
             margin={'0 auto'}
@@ -426,6 +431,6 @@ export default function Home() {
                 </Box>
             </CardContent>
         </Box>
-    </>
+    </Box>
   );
 }
