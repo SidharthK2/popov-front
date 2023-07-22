@@ -30,6 +30,7 @@ import useStore from "@/app/store";
 import useProviderStore from "@/app/store";
 import { ethers } from "ethers";
 import WorldIdVerification from "./components/WorldIdComponent";
+import { ExternalProvider, JsonRpcFetchFunc } from "@ethersproject/providers";
 
 const mock = [
   {
@@ -120,6 +121,7 @@ export default function Home() {
   );
   const setWeb3AuthProvider = useProviderStore((state) => state.setProvider);
   const setOwnerAddress = useProviderStore((state) => state.setOwnerAddress);
+  const setSigner = useProviderStore((state) => state.setSigner);
 
   useEffect(() => {
     (async () => {
@@ -217,14 +219,15 @@ export default function Home() {
     const userInfo = await web3AuthModalPack.getUserInfo();
     console.log("USER INFO: ", userInfo);
 
-    const provider = new ethers.providers.Web3Provider(
-      web3AuthModalPack.getProvider()
+    const provider: any = new ethers.providers.Web3Provider(
+      web3AuthModalPack.getProvider() as ExternalProvider
     );
 
     setSafeAuthSignInResponse(signInInfo);
     setUserInfo(userInfo || undefined);
     setWeb3AuthProvider(provider);
     setOwnerAddress(signInInfo.eoa);
+    setSigner(provider.getSigner());
   };
 
   const logout = async () => {

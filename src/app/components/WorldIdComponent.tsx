@@ -7,22 +7,20 @@ import { ethers } from "ethers";
 import useProviderStore from "@/app/store";
 
 export default function WorldIdVerification() {
-  const ownerAddress = useProviderStore((state) => state.ownerAddress);
-  const provider = useProviderStore((state) => state.provider);
+  const ownerAddress: any = useProviderStore((state) => state.ownerAddress);
+  const signer: any = useProviderStore((state) => state.signer);
+  //   const provider = useProviderStore((state) => state.provider);
   const [proof, setProof] = useState<ISuccessResult | null>(null);
-  //   const provider = new ethers.providers.JsonRpcProvider(
-  //     "https://rpc.ankr.com/eth_goerli"
-  //   );
-  // let wallet = new ethers.Wallet(ownerAddress, provider);
-  //@ts-ignore
-  const signer = provider.getSigner();
+  const provider = new ethers.providers.JsonRpcProvider(
+    "https://rpc.ankr.com/eth_goerli"
+  );
 
   const worldIdcontract = new ethers.Contract(address, abi, signer);
   console.log(worldIdcontract.address);
   const write = () => {};
 
   args: [
-    address!,
+    ownerAddress!,
     proof?.merkle_root
       ? decode<BigNumber>("uint256", proof?.merkle_root ?? "")
       : BigNumber.from(0),
@@ -56,12 +54,12 @@ export default function WorldIdVerification() {
 
   return (
     <main>
-      {address ? (
+      {ownerAddress ? (
         proof ? (
           <button onClick={write}>submit tx</button>
         ) : (
           <IDKitWidget
-            signal={address}
+            signal={ownerAddress}
             action="your-action"
             onSuccess={setProof}
             app_id={"app_staging_7dd2a5702b4d3d17b0d08a50a0867e56"}>
