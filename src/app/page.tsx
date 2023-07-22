@@ -133,9 +133,9 @@ export default function Home() {
         web3AuthNetwork: "testnet",
         chainConfig: {
           chainNamespace: CHAIN_NAMESPACES.EIP155,
-          chainId: "0x5",
+          chainId: "0x13881",
           //move to env
-          rpcTarget: "https://rpc.ankr.com/eth_goerli",
+          rpcTarget: "https://rpc.ankr.com/polygon_mumbai",
         },
         uiConfig: {
           theme: "dark",
@@ -228,6 +228,7 @@ export default function Home() {
     setWeb3AuthProvider(provider);
     setOwnerAddress(signInInfo.eoa);
     setSigner(provider.getSigner());
+    console.log("signer:", provider.getSigner());
   };
 
   const logout = async () => {
