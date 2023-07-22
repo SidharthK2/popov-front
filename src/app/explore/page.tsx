@@ -43,30 +43,7 @@ const mock = [
 
 export default function Explore() {
 	return (
-		<main className={styles.main}>
-			<div className={styles.description}>
-				<p>
-					Get started with popov
-				</p>
-				<div>
-					<a
-						href="/"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						At{' '}
-						<Image
-							src="/ethglobal.svg"
-							alt="EthGlobal Logo"
-							className={styles.vercelLogo}
-							width={100}
-							height={24}
-							priority
-						/>
-					</a>
-				</div>
-			</div>
-
+		<>
 			<div className={styles.center}>
 				<Box>
 					<Box marginBottom={4}>
@@ -169,6 +146,6 @@ export default function Explore() {
 					</Box>
 				</Box>
 			</div>
-		</main>
+		</>
 	)
 }

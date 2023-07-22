@@ -27,31 +27,7 @@ export const mock = [
 
 export default function DaoDetail() {
 	return (
-		<main className={styles.main}>
-			<div className={styles.description}>
-				<p>
-					Get started with popov
-				</p>
-				<div>
-					<a
-						href="/"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						At{' '}
-						<Image
-							src="/ethglobal.svg"
-							alt="Ethglobal Logo"
-							className={styles.vercelLogo}
-							width={100}
-							height={24}
-							priority
-						/>
-					</a>
-				</div>
-			</div>
-
-
+		<>
 			<Box>
 				<Box>
 					<Box marginBottom={4}>
@@ -134,6 +110,6 @@ export default function DaoDetail() {
 					</Grid>
 				</Box>
 			</Box>
-		</main>
+		</>
 	)
 }
