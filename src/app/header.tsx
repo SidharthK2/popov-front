@@ -11,7 +11,6 @@ const Header = (): React.JSX.Element => {
 			<div>
 				<a
 					href="/"
-					target="_blank"
 					rel="noopener noreferrer"
 				>
 					At{' '}
