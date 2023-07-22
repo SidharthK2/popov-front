@@ -1,12 +1,12 @@
-import styles from "@/app/page.module.css";
-import Image from "next/image";
+'use client'
+
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import {CardContent} from "@mui/material";
 import Container from "@/app/container";
+import Header from "@/app/header";
 
 export const mock = [
 	{
@@ -49,6 +49,7 @@ const mockDao = [
 export default function DaoDetail() {
 	return (
 		<Box>
+			<Header/>
 			<Box>
 				<Box marginBottom={4}>
 					<Typography

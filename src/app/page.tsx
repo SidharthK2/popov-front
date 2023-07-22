@@ -1,6 +1,4 @@
 "use client";
-import Image from "next/image";
-import styles from "./page.module.css";
 import { useEffect, useState } from "react";
 import {
   ADAPTER_EVENTS,
@@ -19,8 +17,11 @@ import {
   Web3AuthModalPack,
   Web3AuthConfig,
 } from "@safe-global/auth-kit";
+import { Web3AuthConnector } from "@web3auth/web3auth-wagmi-connector";
 import Button from '@mui/material/Button';
 import Header from "@/app/header";
+import useStore from "@/app/store";
+import useProviderStore from "@/app/store";
 
 const mock = [
     {
@@ -112,8 +113,10 @@ export default function Home() {
   const [provider, setProvider] = useState<SafeEventEmitterProvider | null>(
     null
   );
+  const providerTwo = useProviderStore((state) => state.provider)
+  const setWeb3AuthProvider = useProviderStore((state) => state.setProvider)
 
-  useEffect(() => {
+    useEffect(() => {
     (async () => {
       const options: Web3AuthOptions = {
         //move to env
@@ -212,6 +215,8 @@ export default function Home() {
     setSafeAuthSignInResponse(signInInfo);
     setUserInfo(userInfo || undefined);
     setProvider(web3AuthModalPack.getProvider() as SafeEventEmitterProvider);
+    setWeb3AuthProvider(web3AuthModalPack.getProvider() as SafeEventEmitterProvider);
+    console.log("NOW");
   };
 
   const logout = async () => {
@@ -371,7 +376,7 @@ export default function Home() {
         </Box>
         <Divider />
       </Box>
-            <Box width={1} height={1} data-aos={'fade-up'} component={Card}>
+          <Box width={1} height={1} data-aos={'fade-up'} component={Card}>
             <CardContent>
                 <Box>
                     <Box marginBottom={4}>

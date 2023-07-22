@@ -1,13 +1,14 @@
-import Image from 'next/image'
+'use client'
+
 import styles from '../page.module.css'
-import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import {CardContent} from "@mui/material";
+import useProviderStore from "@/app/store";
+import Header from "@/app/header";
 
 const mock = [
 	{
@@ -42,8 +43,12 @@ const mock = [
 ];
 
 export default function Explore() {
+	const provider = useProviderStore((state) => state.provider)
+	console.log(provider);
+
 	return (
 		<>
+			<Header/>
 			<div className={styles.center}>
 				<Box>
 					<Box marginBottom={4}>
