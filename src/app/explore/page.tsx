@@ -123,7 +123,6 @@ export default function Explore() {
 												</Typography>
 											</Box>
 											<a href={"/dao"}>
-
 												<Box marginLeft={2} color={'primary.main'}>
 													<Box
 														component={'svg'}
