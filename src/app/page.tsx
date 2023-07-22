@@ -22,6 +22,7 @@ import Button from '@mui/material/Button';
 import Header from "@/app/header";
 import useStore from "@/app/store";
 import useProviderStore from "@/app/store";
+import {ethers} from "ethers";
 
 const mock = [
     {
@@ -113,7 +114,6 @@ export default function Home() {
   const [provider, setProvider] = useState<SafeEventEmitterProvider | null>(
     null
   );
-  const providerTwo = useProviderStore((state) => state.provider)
   const setWeb3AuthProvider = useProviderStore((state) => state.setProvider)
   const setOwnerAddress = useProviderStore((state) => state.setOwnerAddress)
 
@@ -213,10 +213,11 @@ export default function Home() {
     const userInfo = await web3AuthModalPack.getUserInfo();
     console.log("USER INFO: ", userInfo);
 
+    const provider = new ethers.providers.Web3Provider(web3AuthModalPack.getProvider());
+
     setSafeAuthSignInResponse(signInInfo);
     setUserInfo(userInfo || undefined);
-    setProvider(web3AuthModalPack.getProvider() as SafeEventEmitterProvider);
-    setWeb3AuthProvider(web3AuthModalPack.getProvider() as SafeEventEmitterProvider);
+    setWeb3AuthProvider(provider);
     setOwnerAddress(signInInfo.eoa);
   };
 
