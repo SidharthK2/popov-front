@@ -7,6 +7,7 @@ import Card from "@mui/material/Card";
 import {CardContent} from "@mui/material";
 import Container from "@/app/container";
 import Header from "@/app/header";
+import useProviderStore from "@/app/store";
 
 export const mock = [
 	{
@@ -47,6 +48,12 @@ const mockDao = [
 ];
 
 export default function DaoDetail() {
+	const provider = useProviderStore((state) => state.provider)
+	const ownerAddress = useProviderStore((state) => state.ownerAddress)
+	console.log('DaoDetail');
+	console.log(provider);
+	console.log(ownerAddress);
+
 	return (
 		<Box>
 			<Header/>

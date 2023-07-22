@@ -9,8 +9,14 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import {TextField} from "@mui/material";
 import Header from "@/app/header";
+import useProviderStore from "@/app/store";
 
 export default function Proposal() {
+	const provider = useProviderStore((state) => state.provider)
+	const ownerAddress = useProviderStore((state) => state.ownerAddress)
+	console.log('Proposal');
+	console.log(provider);
+	console.log(ownerAddress);
 
 	return(
 		<Box>
