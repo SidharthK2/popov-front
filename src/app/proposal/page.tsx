@@ -1,5 +1,6 @@
 'use client'
 
+import React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Divider from '@mui/material/Divider';
@@ -7,20 +8,45 @@ import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import {TextField} from "@mui/material";
+import {Alert, AlertTitle, Dialog, DialogActions, DialogTitle, TextField} from "@mui/material";
 import Header from "@/app/header";
 import useProviderStore from "@/app/store";
 
 export default function Proposal() {
-	const provider = useProviderStore((state) => state.provider)
-	const ownerAddress = useProviderStore((state) => state.ownerAddress)
-	console.log('Proposal');
-	console.log(provider);
-	console.log(ownerAddress);
+	const provider = useProviderStore((state) => state.provider);
+	const ownerAddress = useProviderStore((state) => state.ownerAddress);
+
+	const [open, setOpen] = React.useState(false);
+	const [showAlert, setShowAlert] = React.useState(false);
+
+	const handleClickOpen = () => {
+		setOpen(true);
+	};
+
+	const handleClose = () => {
+		setOpen(false);
+	};
+
+	const handleVoteFor = () => {
+		setOpen(false);
+		setShowAlert(true);
+	};
+
+	const handleVoteAgainst = () => {
+		setOpen(false);
+		setShowAlert(true);
+	};
 
 	return(
 		<Box>
 			<Header/>
+			{ showAlert ?
+				<Alert onClose={() => { setShowAlert(false) }}>
+					Your vote has been added — <strong>thanks !</strong>
+				</Alert>
+				:
+				<></>
+			}
 			<Box padding={8}>
 				<Box
 					display={'flex'}
@@ -35,9 +61,25 @@ export default function Proposal() {
 						<Typography variant={'h6'}>by jeremy.</Typography>
 					</Box>
 					<Box display="flex" marginTop={{ xs: 2, md: 0 }}>
-						<Button variant="contained" color="primary" size="large">
+						<Button variant="contained" color="primary" size="large" onClick={handleClickOpen}>
 							Vote now
 						</Button>
+						<Dialog
+							open={open}
+							onClose={handleClose}
+							aria-labelledby="alert-dialog-title"
+							aria-describedby="alert-dialog-description"
+						>
+							<DialogTitle id="alert-dialog-title">
+								{"What's your vote for this proposal ?"}
+							</DialogTitle>
+							<DialogActions>
+								<Button onClick={handleVoteAgainst}>Disagree</Button>
+								<Button onClick={handleVoteFor} autoFocus>
+									Agree
+								</Button>
+							</DialogActions>
+						</Dialog>
 						<Box
 							component={Button}
 							variant="outlined"
